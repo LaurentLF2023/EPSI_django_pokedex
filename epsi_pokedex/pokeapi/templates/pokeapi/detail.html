@@ -1,1 +1,19 @@
-{{data.name}}
+
+
+<div>
+    <h1>{{data.id}} {{data.name}}</h1>
+    <img src="{{data.sprites.front_default}}">
+    <div>
+        <span>{{data.weight}}</span>
+        <span>{{data.height}}</span>
+    </div>
+    <ul>
+        {% for type in data.types%}
+        <li> {{type.type.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
