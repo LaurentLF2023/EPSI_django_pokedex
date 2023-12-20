@@ -1,19 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
 
-
-<div>
-    <h1>{{data.id}} {{data.name}}</h1>
-    <img src="{{data.sprites.front_default}}">
-    <div>
-        <span>{{data.weight}}</span>
-        <span>{{data.height}}</span>
-    </div>
-    <ul>
-        {% for type in data.types%}
-        <li> {{type.type.name}}</li>
-        {% endfor %}
-    </ul>
-</div>
-
-
-
-
+    <link rel="stylesheet" href="{% static 'pokeapi/style.css' %}">
+        <title>Pokédex</title>
+    </head>
+    <body>
+        <div class="pokemon-card">
+            <h1>{{ data.name.capitalize}}</h1>
+            <h3>{{data.id}}</h3>
+            <img src="{{data.sprites.front_default}}">
+            <div>
+                <span>
+                    <p>Weight : {{data.weight}}</p>
+                </span>
+                <span>
+                    <p> Height : {{data.height}}</p>
+                </span>
+            </div>
+            <div>
+                <h4>Types :</h4>
+                {% for type in data.types%}
+                <p>{{type.type.name}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

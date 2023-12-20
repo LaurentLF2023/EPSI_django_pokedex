@@ -12,6 +12,12 @@ header {
     padding: 20px;
 }
 
+ul {
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 main {
     max-width: 800px;
     margin: 20px auto;
