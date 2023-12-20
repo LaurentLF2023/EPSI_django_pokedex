@@ -1,7 +1,7 @@
 
 <ul>
     {% for pokemon in data.results %}
-    <li><a href="/pokeapi/">{{ pokemon.name }}</a></li>
+    <li><a href="/pokeapi/{{pokemon.url|cut:'https://pokeapi.co/api/v2/pokemon/'}}">{{ pokemon.name }}</a></li>
 
     {% endfor %}
 </ul>
