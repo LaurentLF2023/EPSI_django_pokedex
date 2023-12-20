@@ -1,7 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
 
+<link rel="stylesheet" href="{% static 'pokeapi/style.css' %}">
+    <title>Pokédex</title>
+</head>
+<body>
+    <header>
+        <h1>Pokédex</h1>
+        <p>Attrapez-les tous !</p>
+    </header>
+
+    <main>
+        <section class="search">
+            <input type="text" placeholder="Rechercher un Pokémon">
+
+        </section>
+
+        <section class="pokemon-list">
+            {% for pokemon in data.results %}
+            <!-- Liste des Pokémon -->
+            <a href="/pokeapi/{{pokemon.url|cut:'https://pokeapi.co/api/v2/pokemon/'}}" class="pokemon-card">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.url|cut:'https://pokeapi.co/api/v2/pokemon/'|slice:-1}}.png" alt="{{ pokemon.name }}">
+                <h3>{{ pokemon.name }}</h3>
+                <p>{{pokemon.url|cut:'https://pokeapi.co/api/v2/pokemon/'|slice:-1}}</p>
+            </a>
+
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Pokédex</p>
+    </footer>
 <ul>
-    {% for pokemon in data.results %}
+
     <li><a href="/pokeapi/{{pokemon.url|cut:'https://pokeapi.co/api/v2/pokemon/'}}">{{ pokemon.name }}</a></li>
 
-    {% endfor %}
+
 </ul>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.querySelector('.search input');
+        const pokemonCards = document.querySelectorAll('.pokemon-card');
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            pokemonCards.forEach(function (card) {
+                const pokemonName = card.querySelector('h3').innerText.toLowerCase();
+                const display = pokemonName.includes(searchTerm) ? 'block' : 'none';
+                card.style.display = display;
+            });
+        });
+    });
+</script>
+</body>
+</html>
