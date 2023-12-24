@@ -66,6 +66,10 @@ main {
     margin-bottom: 10px;
 }
 
+#detail {
+    padding-top: 10em;
+}
+
 footer {
     background-color: #3498db;
     color: #fff;

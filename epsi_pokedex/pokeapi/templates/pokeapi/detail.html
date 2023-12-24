@@ -9,24 +9,37 @@
         <title>Pokédex</title>
     </head>
     <body>
-        <div class="pokemon-card">
-            <h1>{{ data.name.capitalize}}</h1>
-            <h3>{{data.id}}</h3>
-            <img src="{{data.sprites.front_default}}">
-            <div>
-                <span>
-                    <p>Weight : {{data.weight}}</p>
-                </span>
-                <span>
-                    <p> Height : {{data.height}}</p>
-                </span>
-            </div>
-            <div>
-                <h4>Types :</h4>
-                {% for type in data.types%}
-                <p>{{type.type.name}}</p>
-                {% endfor %}
+        <header>
+            <h1>Pokédex</h1>
+            <p>Attrapez-les tous !</p>
+            <h3>Détail</h3>
+        </header>
+        <div id="detail">
+            <div class="pokemon-card" style="width: 250px; margin-inline: auto; margin-top: 50px">
+                <h1>{{data.name.capitalize}}</h1>
+                <h3>#{{data.id}}</h3>
+                <img src="{{data.sprites.front_default}}">
+                <div style="display: inline-flex; justify-content: space-around">
+                    <span>
+                        <p>Weight : {{data.weight}}</p>
+                    </span>
+                    <span>
+                        <p> Height : {{data.height}}</p>
+                    </span>
+                </div>
+                <h4 style="margin-bottom: 0">Types :</h4>
+                <div style="display: inline-flex; justify-content: space-around">
+                    {% for type in data.types%}
+                    <p>{{type.type.name.capitalize}}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <button type="submit">
+                        Ajouter à l'équipe
+                    </button>
+                </div>
             </div>
         </div>
+
     </body>
 </html>
