@@ -22,6 +22,11 @@ def index(request):
 
 def detail(request, pokemon_id):
     response = requests.get(URL_BASE + "/" + str(pokemon_id))
+
+    if request.method == 'POST':
+        id_pokemon = json.loads(response.text)
+        request.session['pokemon_id'] = id_pokemon
+
     if response.status_code == 200:
         data = json.loads(response.text)
         template = loader.get_template("pokeapi/detail.html")
