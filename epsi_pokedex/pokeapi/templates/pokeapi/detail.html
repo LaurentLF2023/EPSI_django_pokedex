@@ -14,32 +14,45 @@
             <p>Attrapez-les tous !</p>
             <h3>Détail</h3>
         </header>
-        <div id="detail">
-            <div class="pokemon-card" style="width: 250px; margin-inline: auto; margin-top: 50px">
-                <h1>{{data.name.capitalize}}</h1>
-                <h3>#{{data.id}}</h3>
-                <img src="{{data.sprites.front_default}}">
-                <div style="display: inline-flex; justify-content: space-around">
+        <div style="display: inline-flex; margin: auto; justify-content: space-around">
+            <div id="detail">
+                <div class="pokemon-card" style="width: 250px; margin-inline: auto;">
+                    <h1>{{data.name.capitalize}}</h1>
+                    <h3>#{{data.id}}</h3>
+                    <img src="{{data.sprites.front_default}}">
+                    <div style="display: inline-flex; justify-content: space-around">
                     <span>
                         <p>Weight : {{data.weight}}</p>
                     </span>
-                    <span>
+                        <span>
                         <p> Height : {{data.height}}</p>
                     </span>
-                </div>
-                <h4 style="margin-bottom: 0">Types :</h4>
-                <div style="display: inline-flex; justify-content: space-around">
-                    {% for type in data.types%}
-                    <p>{{type.type.name.capitalize}}</p>
-                    {% endfor %}
-                </div>
-                <div>
-                    <button type="submit">
-                        Ajouter à l'équipe
-                    </button>
+                    </div>
+                    <h4 style="margin-bottom: 0">Types :</h4>
+                    <div style="display: inline-flex; justify-content: space-around">
+                        {% for type in data.types%}
+                            <p>{{type.type.name.capitalize}}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" value="{{ data.id }}">
+                                Ajouter à l'équipe
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div>
+            {% for pkmn in myTeam %}
+                <div id="team">
+                    <div class="pkmn-in-team">
+                        <span>{{ pkmn.name.capitalize }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
         </div>
-
     </body>
 </html>

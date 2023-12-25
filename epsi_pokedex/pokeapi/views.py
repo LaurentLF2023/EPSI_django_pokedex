@@ -22,17 +22,29 @@ def index(request):
 
 def detail(request, pokemon_id):
     response = requests.get(URL_BASE + "/" + str(pokemon_id))
+    request.session['myTeam'] = []
 
     if request.method == 'POST':
         id_pokemon = json.loads(response.text)
-        request.session['pokemon_id'] = id_pokemon
+        request.session['myTeam'].append(id_pokemon)
+        print(request.session['myTeam'])
 
     if response.status_code == 200:
         data = json.loads(response.text)
         template = loader.get_template("pokeapi/detail.html")
-        context = {
-            "data": data,
-        }
+
+        if request.session['myTeam']:
+            print(request.session['myTeam'])
+
+            context = {
+                "data": data,
+                "myTeam": request.session['myTeam']
+            }
+        else:
+            context = {
+                "data":data
+            }
+
         return HttpResponse(template.render(context, request))
     else:
         return HttpResponse("")
